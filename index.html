@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="requestFormApp">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <link rel="stylesheet" href="css/normalize.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+  <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+  <script src="js/jquery/jquery.min.js"></script>
+
+  <script src="js/angular/angular.js"></script>
+  <script src="js/angular/angular-route.min.js"></script>
+  
+  <script src="js/controllers.js"></script>
+
+</head>
+<body ng-controller="HomeCtrl">
+  <div id="main">
+    <h2>Dynamic Content Generator</h2>
+
+    <div>
+
+      <div class="form-group">
+        <span class="label ">Game:</span>
+        <select class="form-control" 
+          ng-model="game"
+          ng-options="item as item.name for item in gamesList" 
+          >
+        </select>
+      </div>
+
+      <div class="form-group" ng-hide="!game || game.characters.length === 0">
+        <span class="label ">Characters:</span>
+        <ul class="checklist">
+          <li ng-repeat="item in game.characters" ng-class="{selected: (item.selected)}" ng-click="select(item)">
+            <span>{{item.name}}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="animations form-group" ng-hide="!game || game.characters.length === 0">
+        <span class="label ">Animations:</span>
+        <div ng-repeat="character in selectedCharacters">
+          <span class="label ">{{character.name}}:</span>
+          <select class="form-control" 
+            ng-model="animation"
+            ng-options="item as item.name for item in animations" 
+            ng-change="setAnimation(item)">
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" >
+        <span class="label ">Background:</span>
+        <select class="form-control" 
+          ng-model="background"
+          ng-options="item as item.name for item in backgrounds">
+        </select>
+        <div class="colors" ng-show="background.name == 'Color'">
+          <span class="label">Color:</span>
+          <div class="colors-field">
+            <input name="colors" type="text" class="form-control" ng-model="background.colors[0]">
+          </div>
+        </div>
+        <div class="colors" ng-show="background.name == 'Gradient'">
+          <span class="label">Colors:</span>
+          <div class="colors-field">
+            <input type="text" class="form-control" ng-model="background.colors[0]">
+            <input type="text" class="form-control" ng-model="background.colors[1]">
+          </div>
+        </div>
+        <div class="colors" ng-show="background.name == 'Patterns'">
+          <span class="label ">Pattern:</span>
+          <select class="form-control" 
+            ng-model="background.pattern"
+            ng-options="item as item.name for item in game.patterns">
+          </select>
+          <div class="patternPreview" ng-show="background.pattern.src" >
+            <img src="templates/wooga2/{{background.pattern.src}}">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" >
+        <span class="label ">CTA:</span>
+        <input name="cta" type="text" class="form-control" ng-model="cta">
+      </div>
+
+      <div class="submit">
+        <div>
+          <button class="btn submit" ng-click="createBanner()">Create</button>
+          <button class="btn submit" ng-hide="!game || game.characters.length === 0">Random</button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- <div class="overlay" ng-show="submitted">
+      <div class="wrapper">
+        <div>
+          <h2>Thank you for submitting request for banner design!</h2>
+          <blockquote>We will respond to you within 24hrs.</blockquote>
+          <button class="btn ok" ng-click="okay()">Okay</button>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+
+  <div id="banner">
+    <h2>Preview</h2>
+    <div class="banner-container">
+      
+    </div>
+  </div>
+       
+</body>
+</html>
+

@@ -1,0 +1,232 @@
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+body{
+  font-family: "Open Sans",helvetica,Arial,"Liberation Sans",sans-serif;
+  font-size: 100%;
+}
+
+#main {
+  width: 100%;
+  max-width: 445px;
+  /*margin: 0 auto;*/
+  background-color: #303030;
+  background-image: url(../img/pattern_transparent.png);
+  color: #fff;
+  position: relative;
+}
+#main > div {
+  padding-bottom: 10px;
+}
+#main h2 {
+  color: #D8E2A9;
+  padding: 10px 10px 20px;
+  font-weight: 200;
+  text-align: center;
+}
+#main .form-group {
+  width: 90%;
+  border-radius: 10px;
+  background-color: #474747;
+  color: #fff;
+  padding: 10px 0 10px 20px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.4rem;
+}
+#main .form-group .label {
+  width: 25%;
+  display: inline-block;
+  font-family: Arial,"Liberation Sans",sans-serif;
+}
+#main .form-group .head {
+  display: block !important;
+  margin-bottom: 10px;
+}
+#main .form-group select,
+#main .form-group input,
+#main .form-group textarea {
+  border-radius: 4px;
+  width: 60%;
+  background-color: #5c5c5c;
+  border: 1px solid #7b7b7b;
+  color: #fff;
+  height: 30px;
+  font-size: 100%;
+  font-family: Arial,"Liberation Sans",sans-serif;
+}
+#main .form-group textarea {
+  height: 90px;
+}
+#main .animations .label {
+  width: 25%;
+}
+#main .animations input {
+  width: 60px;
+  text-align: center;
+}
+
+#main ul.checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+#main ul.checklist li {
+  list-style: none;
+  float: left;
+  color: #fff;
+  font-style: 0.6875rem;
+  margin: 3px 4px;
+  border-radius: 4px;
+  background-color: #373737;
+  display: inline-block;
+  padding: 6px 8px;
+}
+#main ul.checklist li:hover {
+  cursor: pointer;
+  background-color: #a7c500;
+}
+#main ul.checklist li.selected {
+  background-color: #a7c500;
+}
+
+#main .animations select {
+  margin-bottom: 5px;
+}
+
+.btn.remove:hover {
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+.btn.remove{
+  margin-left: 5px;
+  padding: 1px 4px;
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  font-size: 1rem;
+}
+
+.btn.add:hover {
+  background-color: #449d44;
+  border-color: #398439;
+}
+.btn.add {
+  margin-left: 5px;
+  padding: 2px 6px;
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.btn.submit:hover {
+  background-color: #3071a9;
+  border-color: #285e8e;
+}
+.btn.submit {
+  margin-left: 5px;
+  /*padding: 2px 6px;*/
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+
+div.submit {
+  text-align: center;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  top: 0;
+  left: 0;
+  padding: 20px;
+ 
+}
+.overlay .wrapper {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.overlay .wrapper > div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.overlay .wrapper .ok {
+  margin-top: 40px;
+}
+
+
+
+.table ol {
+  margin: 0;
+  padding-left: 5px;
+}
+.lead {
+  text-align: left;
+  font-size: inherit !important;
+  margin-bottom: 2px !important;
+}
+
+
+#banner, #main, .colors-field {
+  display: inline-block;
+}
+
+#banner {
+  width: 50%;
+  max-width: 600px;
+  vertical-align: top;
+  position: relative;
+}
+
+
+.banner-container {
+  width: 320px;
+  height: 50px;
+}
+
+.colors {
+  margin-top: 5px;
+}
+.colors .label {
+  vertical-align: top;
+}
+.colors-field {
+  width: 60%;
+}
+.colors-field input {
+  width: 49% !important;
+}
+
+.patternPreview {
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;
+}
+
+
+

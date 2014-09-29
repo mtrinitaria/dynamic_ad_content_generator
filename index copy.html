@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="requestFormApp">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <link rel="stylesheet" href="css/normalize.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+  <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+  <script src="js/jquery/jquery.min.js"></script>
+  <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+
+  <script src="js/angular/angular.js"></script>
+  <script src="js/angular/angular-route.min.js"></script>
+  
+  <script src="js/controllers.js"></script>
+
+</head>
+<body ng-controller="HomeCtrl">
+  <div id="main">
+    <h2>Dynamic Content Generator</h2>
+      <!-- <form name="entryForm" role="form" data-ng-submit="submitForm(entryForm)" novalidate> -->
+      <div>
+
+      <div class="form-group" ng-repeat="form in myform" >
+        <span class="label" ng-class="{head: (form.type == 'checkbox' || form.type == 'inputs')}">{{form.label}}:</span>
+        <span ng-switch on="form.type">
+          <input name="{{form.id}}" ng-switch-when="text" type="text" class="form-control"
+            ng-model="myform[form.id]"
+            addwatch="{{form.id}}"
+            bind-summary="{{form.id}}"
+            required>
+
+          <textarea name="{{form.id}}" ng-switch-when="textarea" type="text" class="form-control"
+            ng-model="myform[form.id]"
+            addwatch="{{form.id}}"
+            bind-summary="{{form.id}}"
+            required></textarea>
+
+          <ul class="checklist" ng-switch-when="checkbox">
+            <li ng-repeat="item in form.lists" ng-class="{selected: (item.selected)}" ng-click="select(item)">
+              <span>{{item.name}}</span>
+            </li>
+          </ul>
+
+          <div class="animations" ng-switch-when="inputs">
+            <div ng-repeat="item in form.lists track by $index">
+              <div>
+                <span class="label">{{item.name}}</span>
+                <select class="form-control" 
+                  ng-model="item[item.name]" 
+                  ng-options="li as li.name for li in animationsList" 
+                  required>
+                </select>
+                <!-- <input type="text" placeholder="any" ng-model="item.w">
+                <span>x</span>
+                <input type="text" placeholder="any" ng-model="item.h"> -->
+                <!-- <button class="btn remove"><i class="glyphicon glyphicon-remove" ng-click="removeInput($index)"></i></button> -->
+              </div>
+            </div>
+            <!-- <span class="btn add" ng-click="addInput()">Add Size</span> -->
+          </div>
+
+          <select name="{{form.id}}" ng-switch-when="select" class="form-control" 
+            ng-model="myform[form.id]" 
+            addwatch="{{form.id}}"
+            bind-summary="{{form.id}}"
+            ng-options="item as item.name for item in form.lists" 
+            required>
+          </select>
+          
+        </span>
+      </div>
+
+      <div class="submit">
+        <div>
+          <button type="submit" class="btn submit">Submit</button>
+        </div>
+      </div>
+    </div>
+    <!-- </form> -->
+
+    <div class="overlay" ng-show="submitted">
+      <div class="wrapper">
+        <div>
+          <h2>Thank you for submitting request for banner design!</h2>
+          <blockquote>We will respond to you within 24hrs.</blockquote>
+          <button class="btn ok" ng-click="okay()">Okay</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+       
+</body>
+</html>
