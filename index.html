@@ -6,8 +6,9 @@
 
   <link rel="stylesheet" href="css/normalize.css" type="text/css" media="screen">
   <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-  <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"> -->
+  <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"> -->
 
   <script src="js/jquery/jquery.min.js"></script>
 
@@ -28,71 +29,58 @@
         <select class="form-control" 
           ng-model="game"
           ng-options="item as item.name for item in gamesList" 
+          ng-change="loadData(game.id)"
           >
         </select>
       </div>
 
-      <div class="form-group" ng-hide="!game || game.characters.length === 0">
+      <div class="form-group" ng-hide="!game.data || game.data.characters.length === 0">
         <span class="label ">Characters:</span>
         <ul class="checklist">
-          <li ng-repeat="item in game.characters" ng-class="{selected: (item.selected)}" ng-click="select(item)">
+          <li ng-repeat="item in game.data.characters" ng-class="{selected: (item.selected)}" ng-click="select(item)">
             <span>{{item.name}}</span>
           </li>
         </ul>
       </div>
 
-      <div class="animations form-group" ng-hide="!game || game.characters.length === 0">
-        <span class="label ">Animations:</span>
-        <div ng-repeat="character in selectedCharacters">
-          <span class="label ">{{character.name}}:</span>
-          <select class="form-control" 
-            ng-model="animation"
-            ng-options="item as item.name for item in animations" 
-            ng-change="setAnimation(item)">
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group" >
+      <div class="form-group" ng-hide="!game.data || game.data.backgrounds.length === 0">
         <span class="label ">Background:</span>
         <select class="form-control" 
           ng-model="background"
-          ng-options="item as item.name for item in backgrounds">
+          ng-options="item as item.name for item in game.data.backgrounds">
         </select>
-        <div class="colors" ng-show="background.name == 'Color'">
-          <span class="label">Color:</span>
+
+        <div class="colors" ng-show="background.type === 'color'">
           <div class="colors-field">
-            <input name="colors" type="text" class="form-control" ng-model="background.colors[0]">
+            <div style="width:50px; height:50px; background-color:{{background.value}};"></div>
           </div>
         </div>
-        <div class="colors" ng-show="background.name == 'Gradient'">
-          <span class="label">Colors:</span>
+        <div class="colors" ng-show="background.type === 'gradient'">
           <div class="colors-field">
-            <input type="text" class="form-control" ng-model="background.colors[0]">
-            <input type="text" class="form-control" ng-model="background.colors[1]">
+            <div style="width:50px; height:50px; {{getGradient(background.value)}};"></div>
           </div>
         </div>
-        <div class="colors" ng-show="background.name == 'Patterns'">
-          <span class="label ">Pattern:</span>
-          <select class="form-control" 
-            ng-model="background.pattern"
-            ng-options="item as item.name for item in game.patterns">
-          </select>
-          <div class="patternPreview" ng-show="background.pattern.src" >
-            <img src="templates/wooga2/{{background.pattern.src}}">
+        <div class="colors" ng-show="background.type === 'pattern'">
+          <div class="colors-field">
+            <img src="templates/{{game.id}}/{{background.value}}">
           </div>
         </div>
+
       </div>
 
       <div class="form-group" >
         <span class="label ">CTA:</span>
-        <input name="cta" type="text" class="form-control" ng-model="cta">
+        <select class="form-control" 
+          ng-model="cta"
+          ng-options="item for item in game.data.ctas">
+        </select>
+        <!-- <input name="cta" type="text" class="form-control" ng-model="cta"> -->
       </div>
 
       <div class="submit">
         <div>
-          <button class="btn submit" ng-click="createBanner()">Create</button>
-          <button class="btn submit" ng-hide="!game || game.characters.length === 0">Random</button>
+          <button class="btn btn-primary" ng-click="updateBanner()">Update</button>
+          <button class="btn btn-success" ng-hide="!game.data || game.data.characters.length === 0" ng-click="setRandom()">Random</button>
         </div>
       </div>
 
@@ -116,6 +104,13 @@
     <div class="banner-container">
       
     </div>
+  </div>
+
+  <div id="dataJson">
+    <h2>data.json</h2>
+    <pre language="html" type="html">
+      <code>{{game.data}}</code>
+    </pre>
   </div>
        
 </body>
