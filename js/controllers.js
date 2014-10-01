@@ -9,9 +9,15 @@ requestFormApp.controller('HomeCtrl', function ($scope, $http, $location, dateFi
   $scope.game = '';
   
   $scope.gamesList = [
-    {name:'GoW', id:'gow', characters:[] },
+    {name:'GoW', id:'gow' },
     {name:'Jelly Splash', id:'jellySplash' }
-  ]
+  ];
+
+  $http.get('games.json').success(function(res) {
+    $scope.gamesList = res;
+    // $scope.game.data = res;
+    // $scope.setRandom();
+  });
 
   $scope.loadData = function(json) {
     $http.get('templates/' + json + '/data.json').success(function(res) {

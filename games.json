@@ -1,0 +1,8 @@
+[
+  // list of games in drop down
+  // name = visible in dropdown
+  // id = unique id, 
+  //    = this is the folder name inside /templates/
+  {"name":"GoW", "id":"gow" }
+  , {"name":"Jelly Splash", "id":"jellySplash" }
+]
